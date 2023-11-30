@@ -4,3 +4,15 @@ db:
 
 cache:
    type: redis:5.0
+
+# The name of the service container. Must be unique within a project.
+varnish:
+    type: varnish:<VERSION>
+    relationships:
+        varnish:
+            service: app
+            endpoint: http
+    configuration:
+        vcl: !include
+            type: string
+            path: config.vcl
